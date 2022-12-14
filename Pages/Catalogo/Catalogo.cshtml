@@ -1,0 +1,117 @@
+﻿@page
+@model TallerCORE.Pages.Catalogo.CatalogoModel
+
+@{
+    ViewData["Title"] = "Catálogo";
+}
+
+<h1>Catálogo</h1>
+
+@if (TempData["error"]!=null && TempData["error"].ToString() !="") {
+    <div id="msgError" class="alert alert-danger">
+        @TempData["error"].ToString() </div>
+
+
+}
+
+@if (TempData["ok"] != null && TempData["ok"].ToString() != "")
+{
+    <div id="msgOk" class="alert alert-danger">
+        @TempData["ok"].ToString()
+    </div>
+
+
+}
+
+
+<p>
+   <a asp-page="./Nuevo" class="btn btn-primary">Create New</a>
+</p>
+
+<form asp_page="./Catalogo" asp-route-o="@Model.orden" asp-route-d="@Model.dir" method="get" class="form">
+    <div class="form-group row">
+        <label class="form-label col-md-1 offset-8">Categoría: </label>
+        <div class="col-md-3">
+            <select name="c" id="c" onchange="this.form.submit()"
+                asp-items="@Model.Categorias" class="form-control" asp-for="cat">
+            </select>
+        </div>
+    </div>
+</form>
+
+@if (Model.Producto.Count() > 0)
+{
+
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>
+                    <a asp-page="./Catalogo" asp-route-o="N" asp-route-d="@Model.dir" asp-route-c="@Model.cat">
+                    @Html.DisplayNameFor(model => model.Producto[0].Nombre)
+                    </a>
+                </th>
+                @*<th>
+                @Html.DisplayNameFor(model => model.Producto[0].Descripcion)
+            </th>*@
+                <th>
+                    <a asp-page="./Catalogo" asp-route-o="P" asp-route-d="@Model.dir" asp-route-c="@Model.cat">
+                    @Html.DisplayNameFor(model => model.Producto[0].Precio)
+                    </a>
+                </th>
+                <th>
+                    <a asp-page="./Catalogo" asp-route-o="C" asp-route-d="@Model.dir" asp-route-c="@Model.cat">
+                    @Html.DisplayNameFor(model => model.Producto[0].CategoriaNavigation)
+                    </a>
+
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Producto)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    @*<td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>*@
+                    <td style="text-align: right;">
+                        @Html.DisplayFor(modelItem => item.Precio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CategoriaNavigation.Nombre)
+                    </td>
+                    <td>
+                        <a class="btn btn-info" asp-page="./Editar" asp-route-id="@item.Id">Editar</a>
+                        <a class="btn btn-info"  asp-page="./Detalle" asp-route-id="@item.Id">Detalle</a>
+                        <a class="btn btn-info"  asp-page="./Borrar" asp-route-id="@item.Id">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+} else {
+    <div class="alert alert-danger">No se han recuperado datos</div>
+}
+
+
+@section Scripts 
+{
+<script>
+
+
+    $(document).ready(function() {
+
+        setTimeout(function () {
+            $('#msgError').hide();
+                $('#msgOk').hide();
+
+        },5000);
+    });
+</script>
+
+}
+
+

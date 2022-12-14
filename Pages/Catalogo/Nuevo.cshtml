@@ -1,0 +1,50 @@
+﻿@page
+@model TallerCORE.Pages.Catalogo.NuevoModel
+
+@{
+    ViewData["Title"] = "Anadir un nuevo producto";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h4>Rellena el seguiente formulario</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Producto.Nombre" class="control-label"></label>
+                <input asp-for="Producto.Nombre" class="form-control" />
+                <span asp-validation-for="Producto.Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Producto.Descripcion" class="control-label"></label>
+                <input asp-for="Producto.Descripcion" class="form-control" />
+                <span asp-validation-for="Producto.Descripcion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Producto.Precio" class="control-label"></label>
+                <input asp-for="Producto.Precio" class="form-control" />
+                <span asp-validation-for="Producto.Precio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Producto.Categoria" class="control-label"></label>
+                <select asp-for="Producto.Categoria" class ="form-select" asp-items="ViewBag.Categoria"></select>
+                <span asp-validation-for="Producto.Categoria" class="text-danger"></span>
+            </div>
+            <div class="form-group btn-group">
+                <input type="submit" value="Anadir" class="btn btn-primary" />
+                <a class="btn btn-secondary" asp-page="./Catalogo">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+  
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,48 @@
+﻿@page
+@model TallerCORE.Pages.Catalogo.BorrarModel
+
+@{
+    ViewData["Title"] = "Eliminat producto";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Producto</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Producto.Nombre)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Producto.Nombre)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Producto.Descripcion)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Producto.Descripcion)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Producto.Precio)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Producto.Precio)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Producto.CategoriaNavigation)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Producto.CategoriaNavigation.Nombre)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Producto.Id" />
+        <div class="btn-group">
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a class="btn btn-secondary" asp-page="./Catalogo">Volver</a>
+        </div>
+    </form>
+</div>

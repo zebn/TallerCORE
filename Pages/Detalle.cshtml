@@ -1,0 +1,38 @@
+﻿@page
+@model TallerCORE.Pages.DetalleModel
+@{
+    ViewData["Title"] = "Detalle de una tienda";
+}
+
+@if (Model.tienda != null)
+{
+    <h1>Datos de la tienda @Model.tienda.nombre</h1>
+
+    <table class="table table-bordered table-striped">
+        <tbody>
+            <tr>
+                <td>
+                    <strong>Nombre:</strong>
+                    @Model.tienda.nombre
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Dirección:</strong>
+                    @Model.tienda.direccion
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Teléfonos:</strong>
+                    @Model.tienda.telefonos
+                </td>
+            </tr>
+        </tbody>
+    </table>
+} else {
+    <h1>Datos de la tienda</h1>
+    <div class="alert alert-danger">No se han recuperado datos</div>
+}
+<a asp-page="./Tiendas" class="btn btn-success">Volver al listado</a>
+
